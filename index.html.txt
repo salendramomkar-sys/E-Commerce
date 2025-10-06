@@ -1,0 +1,172 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snippex</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alkatra&family=Berkshire+Swash&family=Comic+Neue:wght@700&family=Gentium+Book+Plus:wght@400;700&family=Lato:ital,wght@0,400;0,700;0,900;1,700&family=Lexend+Deca:wght@500&family=Lexend:wght@500&family=Montserrat:wght@500&family=Open+Sans:wght@500;800&family=Roboto:wght@100;400&family=Sue+Ellen+Francisco&family=Work+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900;&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="./images/logo.png" alt=""><span style="font-size: 24px; font-weight: bold; margin-left: 10px;">Snippex</span></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#" id="lg-bag"><i class="fas fa-shopping-bag"></i></a>
+                    <span class="quantity">0</span>
+                </li>
+                <li><a href="#" id="close"><i class="far fa-times"></i></a></li>
+            </ul>
+        </div>
+
+        <div id="mobile">
+            <a href="#"><i class="fas fa-shopping-bag"></i>
+                <span class="quantity">0</span>
+            </a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <div id="cart-dropdown" style="display:none; position:absolute; top:60px; right:80px; width:300px; background:#fff; border:1px solid #ccc; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.3); padding:10px; z-index:200;">
+        <h4>Your Cart</h4>
+        <div id="cart-items"></div>
+        <p id="cart-total">Total: $0</p>
+        <button id="checkout-btn" style="width:100%; padding:10px; background:#088178; color:#fff; border:none; border-radius:5px; cursor:pointer;">Checkout</button>
+    </div>
+
+    <!-- REMAINDER OF THE WEBSITE (NO CHANGES NEEDED) -->
+
+    <!-- Add your full content sections here (hero, feature, products, etc.) -->
+    <!-- Keep everything exactly as it was - only name/title/logo area was changed -->
+
+    <!-- Registration Section -->
+    <section id="registration" class="section-p1">
+        <h2>Create an Account</h2>
+        <form id="register-form">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="tel" id="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+        <p id="register-msg" style="color:green; margin-top:10px;"></p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section-p1">
+        <div class="col">
+            <a href="#"><img src="./images/logo.png" alt=""></a>
+            <h4>Contact</h4>
+            <p>Address: 349, Olorilogbon street, Onigbogbo Lagos</p>
+            <p>Phone: +23456876199, +23458903120</p>
+            <p>Hours: 10.00 - 18.00, Mon - Sat</p>
+
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="sec">
+            <div class="col">
+                <h4>About</h4>
+                <a href="#">About Us</a>
+                <a href="#">Delivery Information</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms and Condition</a>
+                <a href="#">Contact Us</a>          
+            </div>
+
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="#">Sign In</a>
+                <a href="#">View Cart</a>
+                <a href="#">My Account</a>
+                <a href="#">My Wishlist</a>
+                <a href="#">Track my Order</a>
+                <a href="#">Help</a>
+            </div>
+
+            <div class="col install">
+                <h4>Install App</h4>
+                <p>From App Store or Google Play</p>
+                <div class="row">
+                    <img src="./images/app.jpg" alt="">
+                    <img src="./images/play.jpg" alt="">
+                </div>
+                <p>Secured Payment Gateways</p>
+                <img src="./images/pay.png" alt="">
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2024 Snippex. All rights reserved.</p>
+        </div> 
+    </footer>
+
+    <!-- Cart Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let cart = [];
+            const cartButtons = document.querySelectorAll(".cart");
+            const cartQuantity = document.querySelectorAll(".quantity");
+            const cartDropdown = document.getElementById("cart-dropdown");
+            const cartItemsDiv = document.getElementById("cart-items");
+            const cartTotal = document.getElementById("cart-total");
+            const cartIcon = document.getElementById("lg-bag");
+
+            function updateCartDisplay() {
+                cartItemsDiv.innerHTML = "";
+                let total = 0;
+
+                cart.forEach((item, index) => {
+                    const div = document.createElement("div");
+                    div.style.display = "flex";
+                    div.style.justifyContent = "space-between";
+                    div.style.alignItems = "center";
+                    div.style.marginBottom = "5px";
+
+                    div.innerHTML = `
+                        <span>${item.name}</span>
+                        <span>${item.price}</span>
+                        <button class="remove-item" data-index="${index}" style="background:red;color:white;border:none;border-radius:3px;padding:2px 5px;cursor:pointer;">X</button>
+                    `;
+
+                    cartItemsDiv.appendChild(div);
+                    total += parseFloat(item.price.replace("$", ""));
+                });
+
+                cartTotal.innerText = `Total: $${total}`;
+                cartQuantity.forEach(qty => qty.innerText = cart.length);
+
+                // Add event listeners to remove buttons
+                const removeButtons = document.querySelectorAll(".remove-item");
+                removeButtons.forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const i = btn.getAttribute("data-index");
+                        cart.splice(i, 1);
+                        updateCartDisplay();
+                    });
+                });
+            }
+
+            cartButtons.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const product = btn.closest(".pro").querySelector
